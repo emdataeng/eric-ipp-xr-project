@@ -19,6 +19,7 @@ nav:
       - XR industrial data pipeline: projects/xr-industrial-data.md
       - Node RED and OPC UA: projects/node-red-opcua.md
       - Unity and HoloLens integration: projects/unity-hololens.md
+      - Version control and collaboration: projects/version-control.md
   - Download IPP PDF: IPP2_Eric_v1.pdf
 
 plugins:

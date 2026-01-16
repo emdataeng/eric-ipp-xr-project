@@ -29,7 +29,9 @@ https://github.com/Sallamhamza/unity-hololens-industrial-data
 
 ## Quick links
 
-• XR industrial data pipeline: projects/xr-industrial-data.md  
-• Node RED and OPC UA: projects/node-red-opcua.md  
-• Unity and HoloLens integration: projects/unity-hololens.md  
-• Download IPP PDF: IPP2_Eric_v1.pdf
+• [XR industrial data pipeline](projects/xr-industrial-data.md)  
+• [Node-RED and OPC UA integration](projects/node-red-opcua.md)  
+• [Unity and HoloLens integration](projects/unity-hololens.md)  
+• [Version control and collaboration](projects/version-control.md)  
+• [Download IPP PDF](IPP_Eric_Marquez.pdf)
+
