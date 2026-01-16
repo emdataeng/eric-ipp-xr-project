@@ -20,7 +20,7 @@ theme:
 
 nav:
   - Home: index.md
-  - Projects:
+  - Sections:
       - XR industrial data pipeline: projects/xr-industrial-data.md
       - Node RED and OPC UA: projects/node-red-opcua.md
       - Unity and HoloLens integration: projects/unity-hololens.md

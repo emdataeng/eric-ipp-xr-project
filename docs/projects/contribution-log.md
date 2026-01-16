@@ -30,6 +30,29 @@ http://127.0.0.1:1880/
 
 ---
 
+### Tasks 2 and 3 – Connecting to PLC Siemens in stations SIF-402 and SIF-405
+
+**Description**  
+Data access to the Siemens PLC controlling station SIF-402 was validated using two approaches: the SIF API and direct OPC UA communication. The API was first tested to quickly confirm connectivity and available endpoints by consulting the manufacturer documentation. Initial tests using the checker and inventory endpoints confirmed correct operation and returned station-level inventory data. In parallel, OPC UA communication was validated using an [OPC UA browser](https://prosysopc.com/products/opc-ua-browser/) to understand the PLC address space and verify signal availability before integration with Node-RED.
+
+**Challenge**  
+Navigating the OPC UA object tree was initially non-intuitive, and relevant signals were not immediately obvious. Understanding the PLC address structure required careful inspection of the object hierarchy and cross-referencing manufacturer documentation and signal lists.
+
+---
+
+### Task 4 – Connecting to PLC Siemens in station SIF-405 via OPC UA in node-red
+
+**Description**  
+To access the PLC data available trough the OPC UA server running on each PLC, we must use the OPC UA client node in node-red, in this case the “RunningTime” signal was selected arbitrarily to run this test, and all the metadata required was extracted from the OPC UA browser.
+
+**Challenge**  
+Using node-red for the first time might be overwhelming, therefore I advise checking these videos from [node-red academy](https://node-red-academy.learnworlds.com/path-player?courseid=node-red-getting-started&unit=6790b6c583e32519770d179cUnit) which are perfect for understanding the basics as well as the intermediate features.
+
+Coding in node-red is done in JavaScript, in principle is not required to know the language, especially if using assistance from generative AI agents, however understanding programming logic is definitively a skill that comes handy here to process and transform the raw signals into a structured format that can later be processed by the Unity application.
+
+
+---
+
 ## Sprint 2
 
 ### User Story – Accessing PLC data through OPC UA
@@ -42,7 +65,7 @@ As a PLC/OPC developer, I want to access PLC data through OPC UA so that real-ti
 ### Task – Connecting Node-RED to the OPC UA simulator
 
 **Description**  
-OPC UA client nodes were configured in Node-RED to connect to the OPC UA simulator. Relevant variables were selected and tested to confirm correct data acquisition.
+OPC UA client nodes were configured in Node-RED to connect to the [OPC UA simulator](https://prosysopc.com/products/opc-ua-simulation-server/). Relevant variables were selected and tested to confirm correct data acquisition.
 
 **Challenge**  
 Browsing large OPC UA address spaces and identifying relevant variables required careful inspection and validation.
