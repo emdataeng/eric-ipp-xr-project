@@ -8,30 +8,23 @@ My contribution included defining and supporting practical version control pract
 
 ---
 
-## Unity project version control
+## Project repository structure and workflow
 
-The Unity application was developed collaboratively and hosted in a shared GitHub repository:
+The project was developed using a single shared GitHub repository that served as the main integration point for all system components, including XR application code, data pipeline logic, and supporting configuration.
 
 https://github.com/Sallamhamza/unity-hololens-industrial-data
 
-Unity projects generate a large number of files, many of which should not be versioned. Without a disciplined approach, repositories quickly become bloated and difficult to maintain.
+Work was organized using a feature-based branching strategy, where each team member was responsible for implementing and maintaining a specific feature or subsystem in a dedicated branch. This approach allowed parallel development while preserving a clear integration path into the main branch.
 
-To address this, the team followed an established Unity version control workflow, including:
+My individual contributions are traceable in the following branch:
 
-• Use of an appropriate `.gitignore` for Unity projects  
-• Versioning only source assets and configuration files  
-• Excluding generated, cached, and platform-specific artifacts  
+https://github.com/Sallamhamza/unity-hololens-industrial-data/tree/feature/p1-data
 
-The procedure followed by the team is summarized in the reference material linked below:
-
-• Unity version control procedure (video reference used by the team)  
-  https://www.youtube.com/watch?v=dKPdNzETQr8  
-
-This approach enabled parallel development while keeping the repository clean and manageable.
+This branch contains the Node-RED integration work, REST API logic, and supporting configuration corresponding to my assigned feature scope.
 
 ---
 
-## Node-RED version control
+## Specifics about Node-RED version control
 
 By default, Node-RED does not provide built-in support for version control of flows. To address this limitation, **Node-RED Projects mode** was enabled.
 
@@ -47,6 +40,30 @@ The official Node-RED documentation used as reference is linked below:
   https://nodered.org/docs/user-guide/projects/  
 
 Enabling Projects mode was a key step to treat Node-RED flows as maintainable engineering artifacts rather than ad-hoc configurations.
+
+---
+
+## Unity-specific version control considerations
+
+The Unity user interface and XR interaction cleanup were developed by another team member in a separate feature branch:
+
+https://github.com/Sallamhamza/unity-hololens-industrial-data/tree/feature/p3-ui-clean
+
+The Unity component required additional version control considerations due to the large number of generated and platform-specific files produced by Unity.
+
+To address this, the team followed an established Unity version control workflow, including:
+
+• Use of an appropriate `.gitignore` for Unity projects  
+• Versioning only source assets and configuration files  
+• Excluding generated, cached, and platform-specific artifacts  
+
+This procedure is summarized in the reference material linked below:
+
+• Unity version control procedure (video reference used by the team)  
+  https://www.youtube.com/watch?v=dKPdNzETQr8  
+
+This ensured that Unity development could proceed in parallel without degrading repository quality.
+
 
 ---
 
