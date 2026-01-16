@@ -21,6 +21,9 @@ The project integrates Siemens PLCs, OPC UA, Node RED, REST APIs, Unity, and Mic
 • Data aggregation into single station based JSON endpoints
 • Tests for communication, debugging and deployment on Hololens2
 
+My individual contributions are traceable in a dedicated branch of the team repository, referenced in the Version control and collaboration section.
+
+
 ## Source code repository
 
 The main team repository is hosted here:
@@ -35,3 +38,4 @@ https://github.com/Sallamhamza/unity-hololens-industrial-data
 • [Version control and collaboration](projects/version-control.md)  
 • [Download IPP PDF](IPP_Eric_Marquez.pdf)
 
+An assessment and reflection section is included to satisfy course evaluation requirements.
