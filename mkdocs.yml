@@ -19,6 +19,7 @@ nav:
       - XR industrial data pipeline: projects/xr-industrial-data.md
       - Node RED and OPC UA: projects/node-red-opcua.md
       - Unity and HoloLens integration: projects/unity-hololens.md
+      - Benefits, limitations, system requirements and ethics: projects/benefits-limitations-ethics.md
       - Individual contribution log: projects/contribution-log.md
       - Version control and collaboration: projects/version-control.md
       - Assessment and reflection: projects/assessment-and-reflection.md
