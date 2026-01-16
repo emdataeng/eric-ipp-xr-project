@@ -1,6 +1,8 @@
 site_name: Eric Marquez Portfolio
 site_description: Individual technical contributions portfolio
 site_url: https://emdataeng.github.io/eric-ipp-xr-project/
+repo_name: emdataeng/eric-ipp-xr-project
+repo_url: https://github.com/emdataeng/eric-ipp-xr-project
 
 theme:
   name: material
