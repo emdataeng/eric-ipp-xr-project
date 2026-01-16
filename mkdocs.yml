@@ -4,6 +4,11 @@ site_url: https://emdataeng.github.io/eric-ipp-xr-project/
 repo_name: emdataeng/eric-ipp-xr-project
 repo_url: https://github.com/emdataeng/eric-ipp-xr-project
 
+markdown_extensions:
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+
 theme:
   name: material
   features:

@@ -62,7 +62,29 @@ To expose PLC data to the Unity application, REST endpoints were implemented usi
 
 Figure 8 – Implementation of a REST API endpoint returning the latest PLC data
 
-Flow context was used to retain the latest snapshot of each signal, ensuring that API calls returned a consistent state.
+Flow context was used inside a function node to retain and then return, the latest snapshot of each signal, ensuring that API calls returned a consistent state.
+
+=== "Store latest value"
+    ```javascript
+    flow.set("blue_lastSignal", msg.payload);
+    return msg;
+    ```
+
+=== "Return latest value"
+    ```javascript
+    const data = flow.get("blue_lastSignal");
+    if (!data) {
+    msg.payload = { error: "No data available yet" };
+    msg.statusCode = 503;
+    return msg;
+    }
+
+    msg.payload = data;
+    msg.headers = { "Content-Type": "application/json" };
+    return msg;
+    ```
+
+This REST endpoint returns the latest snapshot of the PLC value in JSON format.
 
 ## Station level data aggregation for SIF 402
 
@@ -71,6 +93,112 @@ Multiple SIF 402 signals were aggregated into a single JSON object to minimize A
 ![Figure 15 – Aggregated Node RED flow for SIF 402](../assets/images/node-red-opcua/fig15-sif402-aggregated-flow.png)
 
 Figure 15 – Node RED flow aggregating operational and hopper data for station SIF 402
+
+The latest raw data from the PLC is captured and transformed into a JSON format through the following code.
+
+=== "Extracts OPC UA browser name"
+    ```javascript
+    let browseName = msg.topic?.browseName;
+    let value = msg.payload;
+    ```
+
+=== "Loads latest values"
+    ```javascript
+    let state = flow.get("402_state") || {
+    station: {
+        id: "SIF-402",
+        status: "Unknown",
+        recipe: "StandardMix_v2.3",
+        timestamp: "",
+        runningTime: 0,
+        current: 0,
+        hopper1: {
+            present: true,
+            minPellets: true
+        },
+        hopper2: {
+            present: true,
+            minPellets: true
+        },
+        hopper3: {
+            present: true,
+            minPellets: true
+        }
+    },
+    alarms: []
+    };
+    ```
+=== "Updates new values"
+    ```javascript
+    switch (browseName) {
+
+    case "RunningTime":
+        state.station.runningTime = value;
+        break;
+
+    case "AlarmBit":
+        if (value === true) {
+            state.station.status = "Alarm";
+            state.alarms = [
+                {
+                    id: "station_alarm",
+                    severity: "warning",
+                    message: "Station is in Alarm !",
+                    timestamp: new Date().toISOString()
+                }
+            ];
+        } else {
+            state.station.status = "Running";
+            state.alarms = [
+                {
+                    id: "station_alarm",
+                    severity: "info",
+                    message: "Station has none alarms",
+                    timestamp: new Date().toISOString()
+                }
+            ];
+        }
+        break;
+
+    case "Current":
+        state.station.current = value;
+        break;
+    
+    case "Hopper1_present":
+        state.station.hopper1.present = value;
+        break;
+
+    case "Hopper1_Min_pellets":
+        state.station.hopper1.minPellets = value;
+        break;
+    
+    case "Hopper2_present":
+        state.station.hopper2.present = value;
+        break;
+
+    case "Hopper2_Min_pellets":
+        state.station.hopper2.minPellets = value;
+        break;
+
+    case "Hopper3_present":
+        state.station.hopper3.present = value;
+        break;
+
+    case "Hopper3_Min_pellets":
+        state.station.hopper3.minPellets = value;
+        break;
+    }
+    ```
+
+=== "Saves values in flow context"
+    ```javascript
+    state.station.timestamp = new Date().toISOString();
+
+    flow.set("402_state", state);
+
+    msg.payload = state;
+    return msg;
+    ```
 
 The resulting API response exposed all relevant station data in a single request.
 
@@ -92,6 +220,89 @@ A Node RED flow was then implemented to read these signals via OPC UA and expose
 
 Figure 20 – Node RED flow to extract SIF 405 feeder data. The upper section reads PLC data and the lower section supports simulation
 
+Data is extracted, validated and then transformed into a JSON format through the following set of code, if simulation mode is enabled it returns mock up values.
+
+=== "Extracts OPC UA data Function node"
+    ```javascript
+    // Normalize key from browseName
+    let keyObj = msg.topic || {};
+    let key = "";
+
+    if (typeof keyObj === "object") {
+        key = keyObj.browseName || keyObj.nodeId || JSON.stringify(keyObj);
+    } else {
+        key = String(keyObj);
+    }
+
+    const val = msg.payload;
+
+    // Ignore weird/unexpected messages
+    if (val === undefined || val === null) return null;
+
+    // Helper: store real PLC values unless simulation is active
+    function storeReal(name, value) {
+        const simFlag = flow.get(name + "_sim");
+        if (simFlag && simFlag.active) return;     // simulation active → ignore PLC
+        flow.set(name, { value: value, simulated: false });
+    }
+
+    // Route based on browseName
+    if (key === "Feeder1Cap") storeReal("feeder1_cap", val);
+    if (key === "Feeder1Type") storeReal("feeder1_type", val);
+    if (key === "Feeder2Cap") storeReal("feeder2_cap", val);
+    if (key === "Feeder2Type") storeReal("feeder2_type", val);
+
+    return null;
+    ```
+
+=== "Updates values"
+    ```javascript
+    return {
+    feeder1_cap: flow.get("feeder1_cap"),
+    feeder1_cap_sim: flow.get("feeder1_cap_sim"),
+    feeder1_type: flow.get("feeder1_type"),
+    feeder1_type_sim: flow.get("feeder1_type_sim"),
+    feeder2_cap: flow.get("feeder2_cap"),
+    feeder2_cap_sim: flow.get("feeder2_cap_sim"),
+    feeder2_type: flow.get("feeder2_type"),
+    feeder2_type_sim: flow.get("feeder2_type_sim")
+    };
+    ```
+
+
+=== "Builds JSON response for both feeders"
+    ```javascript
+    const f1c = flow.get('feeder1_cap');
+    const f1t = flow.get('feeder1_type');
+    const f2c = flow.get('feeder2_cap');
+    const f2t = flow.get('feeder2_type');
+
+    // fallback defaults if missing
+    function safe(val) {
+        return val ? val : {value:0, simulated:true};
+    }
+
+    const feeder1 = {
+        feeder: 1,
+        caps: safe(f1c).value,
+        type: safe(f1t).value,
+        simulated: safe(f1c).simulated || safe(f1t).simulated
+    };
+
+    const feeder2 = {
+        feeder: 2,
+        caps: safe(f2c).value,
+        type: safe(f2t).value,
+        simulated: safe(f2c).simulated || safe(f2t).simulated
+    };
+
+    msg.payload = {
+        feeders: [ feeder1, feeder2 ]
+    };
+
+    return msg;
+    ```
+    
 The resulting feeder endpoint response is shown here:
 
 ![Figure 21 – API response for SIF 405 feeders](../assets/images/node-red-opcua/fig21-sif405-feeders-api-response.png)
@@ -105,6 +316,79 @@ The operational signals already implemented for SIF 402, running time, current, 
 ![Figure 23 – Operational data flow for SIF 405](../assets/images/node-red-opcua/fig23-sif405-operational-flow.png)
 
 Figure 23 – Node RED flow implemented to get operational data from SIF 405 using the same structure as for SIF 402
+
+The code is reused and slightly adapted as well.
+
+
+=== "Extracts OPC UA browser name"
+    ```javascript
+    let browseName = msg.topic?.browseName;
+    let value = msg.payload;
+    ```
+
+=== "Loads latest values"
+    ```javascript
+    let state = flow.get("405_state") || {
+    station: {
+        id: "SIF-405",
+        status: "Unknown",
+        recipe: "StandardMix_v2.3",
+        timestamp: "",
+        runningTime: 0,
+        current: 0
+    },
+    alarms: []
+    };
+    ```
+
+=== "Updates new values"
+    ```javascript
+    switch (browseName) {
+
+    case "RunningTime":
+        state.station.runningTime = value;
+        break;
+
+    case "AlarmBit":
+        if (value === true) {
+            state.station.status = "Alarm";
+            state.alarms = [
+                {
+                    id: "station_alarm",
+                    severity: "warning",
+                    message: "Station is in Alarm !",
+                    timestamp: new Date().toISOString()
+                }
+            ];
+        } else {
+            state.station.status = "Running";
+            state.alarms = [
+                {
+                    id: "station_alarm",
+                    severity: "info",
+                    message: "Station has none alarms",
+                    timestamp: new Date().toISOString()
+                }
+            ];
+        }
+        break;
+
+    case "Current":
+        state.station.current = value;
+        break;    
+    }
+    ```
+
+=== "Saves values in flow context"
+    ```javascript
+    state.station.timestamp = new Date().toISOString();
+
+    flow.set("405_state", state);
+
+    msg.payload = state;
+    return msg;
+    ```
+
 
 ## Outcome
 
