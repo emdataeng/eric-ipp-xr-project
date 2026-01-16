@@ -39,7 +39,7 @@ https://github.com/Sallamhamza/unity-hololens-industrial-data
 • [Unity and HoloLens integration](projects/unity-hololens.md)  
 • [Individual contribution log](projects/contribution-log.md)   
 • [Version control and collaboration](projects/version-control.md)  
-• [Download IPP PDF](IPP_Eric_Marquez.pdf)
+• [Download IPP PDF](IPP2_Eric_v1.pdf)
 
 An [Assessment and reflection](projects/assessment-and-reflection.md) section is included to satisfy course evaluation requirements.
 

@@ -73,6 +73,12 @@ The application also supported simultaneous visualization of multiple stations.
 Figure 24 – HoloLens view showing simultaneous visualization of stations SIF402 and SIF405
 
 ![Live data demo](../assets/gifs/DemoStations2and5.gif)
+
+
+![XR application testing on Microsoft HoloLens 2](../assets/images/hololens-testing.JPG)
+
+*Testing the XR application with live industrial data on Microsoft HoloLens 2.*
+
 ---
 
 ## Outcome

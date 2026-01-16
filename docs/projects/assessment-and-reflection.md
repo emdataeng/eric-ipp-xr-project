@@ -38,3 +38,17 @@ This page reproduces the self-assessment, peer review, and team assessment secti
 > **Jorge**  
 > Good overview of the tasks, keeping track of missing details, presentation slides and playing a key role organizing and hosting the podcast.
 >
+
+---
+
+## Team collaboration and dissemination
+
+![Individual contribution to project podcast and dissemination](../assets/images/eric-podcast.JPG)
+
+*Participating in the project podcast, discussing technical and design aspects of the XR system.*
+
+
+![Project team during podcast recording and technical discussion](../assets/images/team-podcast.jpeg)
+
+*Project team during podcast recording and technical discussion as part of the XR project.*
+
