@@ -115,3 +115,11 @@ The Node RED and OPC UA layer achieved:
 • Station level data aggregation to reduce Unity API calls  
 • REST APIs suitable for XR consumption  
 • Reusable flow patterns across stations
+
+## Engineering challenges and lessons learned
+
+• OPC UA discovery was non-trivial due to deeply nested address spaces and inconsistent signal naming  
+• Early validation with an OPC UA browser was essential to avoid incorrect node configuration  
+• Containerized Node-RED setups introduced networking issues under WSL2, reinforcing the need to understand host–container communication  
+• Aggregating signals into station-level JSON objects significantly reduced API complexity and coupling with Unity  
+• Flow context management was critical to ensure REST endpoints returned consistent snapshots rather than transient values

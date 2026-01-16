@@ -98,3 +98,10 @@ The implemented XR industrial data pipeline demonstrated:
 • Successful deployment and testing on HoloLens 2  
 
 This page captures the system-level perspective of the project, while detailed implementation aspects are documented in the corresponding technical pages.
+
+## Engineering challenges and lessons learned
+
+• Exposing raw PLC signals directly to XR applications creates tight coupling and poor scalability  
+• Introducing a station-level abstraction simplified the XR logic and enabled multi-station support  
+• Simulation paths were necessary to decouple development from PLC availability  
+• Designing the pipeline with clear layer separation made it easier to extend the system to additional stations without redesign

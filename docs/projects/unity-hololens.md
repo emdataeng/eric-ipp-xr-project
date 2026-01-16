@@ -86,3 +86,10 @@ From an integration perspective, the Unity and XR layer demonstrated that:
 
 This validated the end-to-end pipeline from industrial equipment to XR visualization.
 
+## Engineering challenges and lessons learned
+
+• Direct dependency on live PLC data would have blocked Unity development during early stages  
+• A simulation-first strategy enabled parallel development and early validation of XR behavior  
+• Stable and self-contained REST APIs allowed Unity logic to remain unchanged when switching from simulated to live data  
+• Network accessibility and firewall configuration became practical deployment constraints during HoloLens testing
+
