@@ -6,7 +6,9 @@ Industrial Data Engineering and Extended Reality
 
 This website presents my individual technical contributions to an industrial extended reality project developed during the HT2025 course. The project was a team effort, and the main source code repository is hosted under a teammate’s GitHub account.
 
-This site focuses on my responsibilities and deliverables, and provides a structured view of my work, supported by screenshots and gifs.
+It focuses on my responsibilities and deliverables, and provides a structured view of my work, supported by screenshots and gifs.
+A detailed sprint-based log of my individual contributions is available in the Individual contribution log.
+
 
 ## Project context
 
@@ -34,8 +36,10 @@ https://github.com/Sallamhamza/unity-hololens-industrial-data
 
 • [XR industrial data pipeline](projects/xr-industrial-data.md)  
 • [Node-RED and OPC UA integration](projects/node-red-opcua.md)  
-• [Unity and HoloLens integration](projects/unity-hololens.md)  
+• [Unity and HoloLens integration](projects/unity-hololens.md)
+• [Individual contribution log](projects/contribution-log.md)
 • [Version control and collaboration](projects/version-control.md)  
 • [Download IPP PDF](IPP_Eric_Marquez.pdf)
 
-An assessment and reflection section is included to satisfy course evaluation requirements.
+An [Assessment and reflection](projects/assessment-and-reflection.md) section is included to satisfy course evaluation requirements.
+
