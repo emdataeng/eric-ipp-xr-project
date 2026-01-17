@@ -1,6 +1,9 @@
 # Eric Marquez
 
-Industrial Data Engineering and Extended Reality
+<img src="assets/images/eric-hallway-UU.JPG" alt="Eric Marquez" width="180">
+
+
+# Industrial Data Engineering and Extended Reality
 
 ## About this portfolio
 
