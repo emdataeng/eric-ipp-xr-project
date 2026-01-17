@@ -1,0 +1,1350 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Individual technical contributions portfolio">
+      
+      
+      
+        <link rel="canonical" href="https://emdataeng.github.io/eric-ipp-xr-project/projects/node-red-opcua/">
+      
+      
+        <link rel="prev" href="../xr-industrial-data/">
+      
+      
+        <link rel="next" href="../unity-hololens/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Node RED and OPC UA - Eric Marquez Portfolio</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#node-red-and-opc-ua-integration" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Eric Marquez Portfolio" class="md-header__button md-logo" aria-label="Eric Marquez Portfolio" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Eric Marquez Portfolio
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Node RED and OPC UA
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/emdataeng/eric-ipp-xr-project" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    emdataeng/eric-ipp-xr-project
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../xr-industrial-data/" class="md-tabs__link">
+          
+  
+  
+  Sections
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../IPP2_Eric_v1.pdf" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Download IPP PDF
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Eric Marquez Portfolio" class="md-nav__button md-logo" aria-label="Eric Marquez Portfolio" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Eric Marquez Portfolio
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/emdataeng/eric-ipp-xr-project" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    emdataeng/eric-ipp-xr-project
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sections
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sections
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xr-industrial-data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    XR industrial data pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Node RED and OPC UA
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Node RED and OPC UA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#scope-of-contribution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scope of contribution
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#connectivity-validation-using-the-sif-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Connectivity validation using the SIF API
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#node-red-environment-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Node RED environment setup
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#opc-ua-signal-discovery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OPC UA signal discovery
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reading-plc-data-via-opc-ua-in-node-red" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reading PLC data via OPC UA in Node RED
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rest-api-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        REST API implementation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#station-level-data-aggregation-for-sif-402" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Station level data aggregation for SIF 402
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-identification-and-extraction-for-sif-405-feeders" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data identification and extraction for SIF 405 feeders
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reuse-of-operational-signals-for-sif-405" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reuse of operational signals for SIF 405
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#outcome" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outcome
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#engineering-challenges-and-lessons-learned" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Engineering challenges and lessons learned
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../unity-hololens/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unity and HoloLens integration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../benefits-limitations-ethics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Benefits, limitations, system requirements and ethics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contribution-log/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Individual contribution log
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../version-control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Version control and collaboration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../assessment-and-reflection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Assessment and reflection
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../IPP2_Eric_v1.pdf" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Download IPP PDF
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#scope-of-contribution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scope of contribution
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#connectivity-validation-using-the-sif-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Connectivity validation using the SIF API
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#node-red-environment-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Node RED environment setup
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#opc-ua-signal-discovery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OPC UA signal discovery
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reading-plc-data-via-opc-ua-in-node-red" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reading PLC data via OPC UA in Node RED
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rest-api-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        REST API implementation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#station-level-data-aggregation-for-sif-402" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Station level data aggregation for SIF 402
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-identification-and-extraction-for-sif-405-feeders" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data identification and extraction for SIF 405 feeders
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reuse-of-operational-signals-for-sif-405" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reuse of operational signals for SIF 405
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#outcome" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outcome
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#engineering-challenges-and-lessons-learned" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Engineering challenges and lessons learned
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="node-red-and-opc-ua-integration">Node RED and OPC UA integration</h1>
+<h2 id="scope-of-contribution">Scope of contribution</h2>
+<p>This page documents my primary technical contribution to the project: establishing reliable industrial connectivity and transforming raw PLC signals into structured REST APIs consumable by Unity.</p>
+<p>My responsibilities covered signal discovery, Node RED flow design, REST API implementation, and station level data aggregation for SIF 402 and SIF 405.</p>
+<h2 id="connectivity-validation-using-the-sif-api">Connectivity validation using the SIF API</h2>
+<p>Before implementing OPC UA flows in Node RED, connectivity to the SIF system was validated using the SIF API checker endpoint. This provided a fast confirmation that the system was reachable and operational.</p>
+<p><img alt="Figure 2 – API checker response" src="../../assets/images/node-red-opcua/fig02-api-checker-response.png" /></p>
+<p>Figure 2 – Response obtained from the GET request to the checker endpoint. Success true confirms that the API is working</p>
+<h2 id="node-red-environment-setup">Node RED environment setup</h2>
+<p>Node RED was installed and configured with OPC UA client nodes to enable communication with Siemens PLCs.</p>
+<p><img alt="Figure 1 – Node RED with OPC UA nodes installed" src="../../assets/images/node-red-opcua/fig01-node-red-opcua-setup.png" /></p>
+<p>Figure 1 – Initial Node RED setup showing OPC UA nodes available</p>
+<p>This setup was tested both on Windows and in containerized environments. Early tests highlighted networking considerations when using Docker with WSL2, particularly for OPC UA communication.</p>
+<h2 id="opc-ua-signal-discovery">OPC UA signal discovery</h2>
+<p>Before implementing Node RED flows, PLC communication was validated using an OPC UA browser to inspect available signals, browse paths, and data types.</p>
+<p>SIF 402 discovery example:</p>
+<p><img alt="Figure 4 – OPC UA browser for station SIF 402" src="../../assets/images/node-red-opcua/fig04-opcua-browser-sif402.png" /></p>
+<p>Figure 4 – OPC UA browser view showing available signals for station SIF 402</p>
+<p>SIF 405 discovery example:</p>
+<p><img alt="Figure 19 – OPC UA browser for station SIF 405" src="../../assets/images/node-red-opcua/fig19-opcua-browser-sif405.png" /></p>
+<p>Figure 19 – OPC UA browser view showing feeder related signals for station SIF 405</p>
+<h2 id="reading-plc-data-via-opc-ua-in-node-red">Reading PLC data via OPC UA in Node RED</h2>
+<p>Initial Node RED flows focused on reading a single PLC signal to validate connectivity and data integrity.</p>
+<p><img alt="Figure 6 – Reading a single PLC signal via OPC UA" src="../../assets/images/node-red-opcua/fig06-opcua-single-signal.png" /></p>
+<p>Figure 6 – Node RED flow reading a single PLC signal through OPC UA</p>
+<p>Once validated, the flow was extended to read multiple signals in parallel.</p>
+<p><img alt="Figure 7 – Reading multiple PLC signals via OPC UA" src="../../assets/images/node-red-opcua/fig07-opcua-multiple-signals.png" /></p>
+<p>Figure 7 – Node RED flow scaled to read multiple PLC signals</p>
+<h2 id="rest-api-implementation">REST API implementation</h2>
+<p>To expose PLC data to the Unity application, REST endpoints were implemented using Node RED HTTP In and HTTP Out nodes.</p>
+<p><img alt="Figure 8 – REST API endpoint implementation in Node RED" src="../../assets/images/node-red-opcua/fig08-node-red-rest-endpoint.png" /></p>
+<p>Figure 8 – Implementation of a REST API endpoint returning the latest PLC data</p>
+<p>Flow context was used inside a function node to retain and then return, the latest snapshot of each signal, ensuring that API calls returned a consistent state.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Store latest value</label><label for="__tabbed_1_2">Return latest value</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="nx">flow</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">&quot;blue_lastSignal&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">payload</span><span class="p">);</span>
+<span class="k">return</span><span class="w"> </span><span class="nx">msg</span><span class="p">;</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">flow</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;blue_lastSignal&quot;</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">data</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="nx">msg</span><span class="p">.</span><span class="nx">payload</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">error</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;No data available yet&quot;</span><span class="w"> </span><span class="p">};</span>
+<span class="nx">msg</span><span class="p">.</span><span class="nx">statusCode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">503</span><span class="p">;</span>
+<span class="k">return</span><span class="w"> </span><span class="nx">msg</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">msg</span><span class="p">.</span><span class="nx">payload</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">data</span><span class="p">;</span>
+<span class="nx">msg</span><span class="p">.</span><span class="nx">headers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s2">&quot;Content-Type&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;application/json&quot;</span><span class="w"> </span><span class="p">};</span>
+<span class="k">return</span><span class="w"> </span><span class="nx">msg</span><span class="p">;</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>This REST endpoint returns the latest snapshot of the PLC value in JSON format.</p>
+<h2 id="station-level-data-aggregation-for-sif-402">Station level data aggregation for SIF 402</h2>
+<p>Multiple SIF 402 signals were aggregated into a single JSON object to minimize API calls from Unity. The packed payload included operational signals and hopper state.</p>
+<p><img alt="Figure 15 – Aggregated Node RED flow for SIF 402" src="../../assets/images/node-red-opcua/fig15-sif402-aggregated-flow.png" /></p>
+<p>Figure 15 – Node RED flow aggregating operational and hopper data for station SIF 402</p>
+<p>The latest raw data from the PLC is captured and transformed into a JSON format through the following code.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:4"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Extracts OPC UA browser name</label><label for="__tabbed_2_2">Loads latest values</label><label for="__tabbed_2_3">Updates new values</label><label for="__tabbed_2_4">Saves values in flow context</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">browseName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">topic</span><span class="o">?</span><span class="p">.</span><span class="nx">browseName</span><span class="p">;</span>
+<span class="kd">let</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">payload</span><span class="p">;</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">flow</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;402_state&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="p">{</span>
+<span class="nx">station</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;SIF-402&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">status</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Unknown&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">recipe</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;StandardMix_v2.3&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">timestamp</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">runningTime</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">current</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">hopper1</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">present</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">minPellets</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nx">hopper2</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">present</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">minPellets</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nx">hopper3</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">present</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">minPellets</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">},</span>
+<span class="nx">alarms</span><span class="o">:</span><span class="w"> </span><span class="p">[]</span>
+<span class="p">};</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="nx">browseName</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="k">case</span><span class="w"> </span><span class="s2">&quot;RunningTime&quot;</span><span class="o">:</span>
+<span class="w">    </span><span class="nx">state</span><span class="p">.</span><span class="nx">station</span><span class="p">.</span><span class="nx">runningTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">value</span><span class="p">;</span>
+<span class="w">    </span><span class="k">break</span><span class="p">;</span>
+
+<span class="k">case</span><span class="w"> </span><span class="s2">&quot;AlarmBit&quot;</span><span class="o">:</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">value</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">state</span><span class="p">.</span><span class="nx">station</span><span class="p">.</span><span class="nx">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Alarm&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">state</span><span class="p">.</span><span class="nx">alarms</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;station_alarm&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nx">severity</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;warning&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nx">message</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Station is in Alarm !&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nx">timestamp</span><span class="o">:</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Date</span><span class="p">().</span><span class="nx">toISOString</span><span class="p">()</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">];</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">state</span><span class="p">.</span><span class="nx">station</span><span class="p">.</span><span class="nx">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Running&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">state</span><span class="p">.</span><span class="nx">alarms</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;station_alarm&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nx">severity</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;info&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nx">message</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Station has none alarms&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nx">timestamp</span><span class="o">:</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Date</span><span class="p">().</span><span class="nx">toISOString</span><span class="p">()</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">];</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">break</span><span class="p">;</span>
+
+<span class="k">case</span><span class="w"> </span><span class="s2">&quot;Current&quot;</span><span class="o">:</span>
+<span class="w">    </span><span class="nx">state</span><span class="p">.</span><span class="nx">station</span><span class="p">.</span><span class="nx">current</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">value</span><span class="p">;</span>
+<span class="w">    </span><span class="k">break</span><span class="p">;</span>
+
+<span class="k">case</span><span class="w"> </span><span class="s2">&quot;Hopper1_present&quot;</span><span class="o">:</span>
+<span class="w">    </span><span class="nx">state</span><span class="p">.</span><span class="nx">station</span><span class="p">.</span><span class="nx">hopper1</span><span class="p">.</span><span class="nx">present</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">value</span><span class="p">;</span>
+<span class="w">    </span><span class="k">break</span><span class="p">;</span>
+
+<span class="k">case</span><span class="w"> </span><span class="s2">&quot;Hopper1_Min_pellets&quot;</span><span class="o">:</span>
+<span class="w">    </span><span class="nx">state</span><span class="p">.</span><span class="nx">station</span><span class="p">.</span><span class="nx">hopper1</span><span class="p">.</span><span class="nx">minPellets</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">value</span><span class="p">;</span>
+<span class="w">    </span><span class="k">break</span><span class="p">;</span>
+
+<span class="k">case</span><span class="w"> </span><span class="s2">&quot;Hopper2_present&quot;</span><span class="o">:</span>
+<span class="w">    </span><span class="nx">state</span><span class="p">.</span><span class="nx">station</span><span class="p">.</span><span class="nx">hopper2</span><span class="p">.</span><span class="nx">present</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">value</span><span class="p">;</span>
+<span class="w">    </span><span class="k">break</span><span class="p">;</span>
+
+<span class="k">case</span><span class="w"> </span><span class="s2">&quot;Hopper2_Min_pellets&quot;</span><span class="o">:</span>
+<span class="w">    </span><span class="nx">state</span><span class="p">.</span><span class="nx">station</span><span class="p">.</span><span class="nx">hopper2</span><span class="p">.</span><span class="nx">minPellets</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">value</span><span class="p">;</span>
+<span class="w">    </span><span class="k">break</span><span class="p">;</span>
+
+<span class="k">case</span><span class="w"> </span><span class="s2">&quot;Hopper3_present&quot;</span><span class="o">:</span>
+<span class="w">    </span><span class="nx">state</span><span class="p">.</span><span class="nx">station</span><span class="p">.</span><span class="nx">hopper3</span><span class="p">.</span><span class="nx">present</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">value</span><span class="p">;</span>
+<span class="w">    </span><span class="k">break</span><span class="p">;</span>
+
+<span class="k">case</span><span class="w"> </span><span class="s2">&quot;Hopper3_Min_pellets&quot;</span><span class="o">:</span>
+<span class="w">    </span><span class="nx">state</span><span class="p">.</span><span class="nx">station</span><span class="p">.</span><span class="nx">hopper3</span><span class="p">.</span><span class="nx">minPellets</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">value</span><span class="p">;</span>
+<span class="w">    </span><span class="k">break</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="nx">state</span><span class="p">.</span><span class="nx">station</span><span class="p">.</span><span class="nx">timestamp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Date</span><span class="p">().</span><span class="nx">toISOString</span><span class="p">();</span>
+
+<span class="nx">flow</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">&quot;402_state&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">state</span><span class="p">);</span>
+
+<span class="nx">msg</span><span class="p">.</span><span class="nx">payload</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">state</span><span class="p">;</span>
+<span class="k">return</span><span class="w"> </span><span class="nx">msg</span><span class="p">;</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>The resulting API response exposed all relevant station data in a single request.</p>
+<p><img alt="Figure 16 – Aggregated API response for SIF 402" src="../../assets/images/node-red-opcua/fig16-sif402-api-response.png" /></p>
+<p>Figure 16 – REST API response containing aggregated station data for SIF 402</p>
+<h2 id="data-identification-and-extraction-for-sif-405-feeders">Data identification and extraction for SIF 405 feeders</h2>
+<p>For SIF 405, the first step was to identify variables related to the number and type of caps in each feeder by filtering the available signals list.</p>
+<p><img alt="Figure 18 – Filtered variable list for SIF 405" src="../../assets/images/node-red-opcua/fig18-sif405-variable-list.png" /></p>
+<p>Figure 18 – List of variables filtered for station SIF 405</p>
+<p>A Node RED flow was then implemented to read these signals via OPC UA and expose them through a REST endpoint, while also including a simulation path for development and testing.</p>
+<p><img alt="Figure 20 – Node RED flow for SIF 405 feeders" src="../../assets/images/node-red-opcua/fig20-sif405-feeders-flow.png" /></p>
+<p>Figure 20 – Node RED flow to extract SIF 405 feeder data. The upper section reads PLC data and the lower section supports simulation</p>
+<p>Data is extracted, validated and then transformed into a JSON format through the following set of code, if simulation mode is enabled it returns mock up values.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:3"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><input id="__tabbed_3_3" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Extracts OPC UA data Function node</label><label for="__tabbed_3_2">Updates values</label><label for="__tabbed_3_3">Builds JSON response for both feeders</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="c1">// Normalize key from browseName</span>
+<span class="kd">let</span><span class="w"> </span><span class="nx">keyObj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">topic</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="p">{};</span>
+<span class="kd">let</span><span class="w"> </span><span class="nx">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="ow">typeof</span><span class="w"> </span><span class="nx">keyObj</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">keyObj</span><span class="p">.</span><span class="nx">browseName</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">keyObj</span><span class="p">.</span><span class="nx">nodeId</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">keyObj</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">String</span><span class="p">(</span><span class="nx">keyObj</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">payload</span><span class="p">;</span>
+
+<span class="c1">// Ignore weird/unexpected messages</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">val</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="kc">undefined</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">val</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+
+<span class="c1">// Helper: store real PLC values unless simulation is active</span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">storeReal</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">simFlag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">flow</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">name</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;_sim&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">simFlag</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">simFlag</span><span class="p">.</span><span class="nx">active</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w">     </span><span class="c1">// simulation active → ignore PLC</span>
+<span class="w">    </span><span class="nx">flow</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="nx">simulated</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="w"> </span><span class="p">});</span>
+<span class="p">}</span>
+
+<span class="c1">// Route based on browseName</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">key</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s2">&quot;Feeder1Cap&quot;</span><span class="p">)</span><span class="w"> </span><span class="nx">storeReal</span><span class="p">(</span><span class="s2">&quot;feeder1_cap&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">val</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">key</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s2">&quot;Feeder1Type&quot;</span><span class="p">)</span><span class="w"> </span><span class="nx">storeReal</span><span class="p">(</span><span class="s2">&quot;feeder1_type&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">val</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">key</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s2">&quot;Feeder2Cap&quot;</span><span class="p">)</span><span class="w"> </span><span class="nx">storeReal</span><span class="p">(</span><span class="s2">&quot;feeder2_cap&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">val</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">key</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s2">&quot;Feeder2Type&quot;</span><span class="p">)</span><span class="w"> </span><span class="nx">storeReal</span><span class="p">(</span><span class="s2">&quot;feeder2_type&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">val</span><span class="p">);</span>
+
+<span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="k">return</span><span class="w"> </span><span class="p">{</span>
+<span class="nx">feeder1_cap</span><span class="o">:</span><span class="w"> </span><span class="nx">flow</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;feeder1_cap&quot;</span><span class="p">),</span>
+<span class="nx">feeder1_cap_sim</span><span class="o">:</span><span class="w"> </span><span class="nx">flow</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;feeder1_cap_sim&quot;</span><span class="p">),</span>
+<span class="nx">feeder1_type</span><span class="o">:</span><span class="w"> </span><span class="nx">flow</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;feeder1_type&quot;</span><span class="p">),</span>
+<span class="nx">feeder1_type_sim</span><span class="o">:</span><span class="w"> </span><span class="nx">flow</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;feeder1_type_sim&quot;</span><span class="p">),</span>
+<span class="nx">feeder2_cap</span><span class="o">:</span><span class="w"> </span><span class="nx">flow</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;feeder2_cap&quot;</span><span class="p">),</span>
+<span class="nx">feeder2_cap_sim</span><span class="o">:</span><span class="w"> </span><span class="nx">flow</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;feeder2_cap_sim&quot;</span><span class="p">),</span>
+<span class="nx">feeder2_type</span><span class="o">:</span><span class="w"> </span><span class="nx">flow</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;feeder2_type&quot;</span><span class="p">),</span>
+<span class="nx">feeder2_type_sim</span><span class="o">:</span><span class="w"> </span><span class="nx">flow</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;feeder2_type_sim&quot;</span><span class="p">)</span>
+<span class="p">};</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">f1c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">flow</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;feeder1_cap&#39;</span><span class="p">);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">f1t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">flow</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;feeder1_type&#39;</span><span class="p">);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">f2c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">flow</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;feeder2_cap&#39;</span><span class="p">);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">f2t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">flow</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;feeder2_type&#39;</span><span class="p">);</span>
+
+<span class="c1">// fallback defaults if missing</span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">safe</span><span class="p">(</span><span class="nx">val</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">val</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">val</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">value</span><span class="o">:</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">simulated</span><span class="o">:</span><span class="kc">true</span><span class="p">};</span>
+<span class="p">}</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">feeder1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">feeder</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">caps</span><span class="o">:</span><span class="w"> </span><span class="nx">safe</span><span class="p">(</span><span class="nx">f1c</span><span class="p">).</span><span class="nx">value</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="nx">safe</span><span class="p">(</span><span class="nx">f1t</span><span class="p">).</span><span class="nx">value</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">simulated</span><span class="o">:</span><span class="w"> </span><span class="nx">safe</span><span class="p">(</span><span class="nx">f1c</span><span class="p">).</span><span class="nx">simulated</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">safe</span><span class="p">(</span><span class="nx">f1t</span><span class="p">).</span><span class="nx">simulated</span>
+<span class="p">};</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">feeder2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">feeder</span><span class="o">:</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">caps</span><span class="o">:</span><span class="w"> </span><span class="nx">safe</span><span class="p">(</span><span class="nx">f2c</span><span class="p">).</span><span class="nx">value</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="nx">safe</span><span class="p">(</span><span class="nx">f2t</span><span class="p">).</span><span class="nx">value</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">simulated</span><span class="o">:</span><span class="w"> </span><span class="nx">safe</span><span class="p">(</span><span class="nx">f2c</span><span class="p">).</span><span class="nx">simulated</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">safe</span><span class="p">(</span><span class="nx">f2t</span><span class="p">).</span><span class="nx">simulated</span>
+<span class="p">};</span>
+
+<span class="nx">msg</span><span class="p">.</span><span class="nx">payload</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">feeders</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="nx">feeder1</span><span class="p">,</span><span class="w"> </span><span class="nx">feeder2</span><span class="w"> </span><span class="p">]</span>
+<span class="p">};</span>
+
+<span class="k">return</span><span class="w"> </span><span class="nx">msg</span><span class="p">;</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>The resulting feeder endpoint response is shown here:</p>
+<p><img alt="Figure 21 – API response for SIF 405 feeders" src="../../assets/images/node-red-opcua/fig21-sif405-feeders-api-response.png" /></p>
+<p>Figure 21 – REST API response for SIF 405 feeders data</p>
+<h2 id="reuse-of-operational-signals-for-sif-405">Reuse of operational signals for SIF 405</h2>
+<p>The operational signals already implemented for SIF 402, running time, current, and alarm state, were replicated for SIF 405 by reusing the same logic and changing the PLC endpoint, while removing hopper specific signals.</p>
+<p><img alt="Figure 23 – Operational data flow for SIF 405" src="../../assets/images/node-red-opcua/fig23-sif405-operational-flow.png" /></p>
+<p>Figure 23 – Node RED flow implemented to get operational data from SIF 405 using the same structure as for SIF 402</p>
+<p>The code is reused and slightly adapted as well.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:4"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><input id="__tabbed_4_3" name="__tabbed_4" type="radio" /><input id="__tabbed_4_4" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Extracts OPC UA browser name</label><label for="__tabbed_4_2">Loads latest values</label><label for="__tabbed_4_3">Updates new values</label><label for="__tabbed_4_4">Saves values in flow context</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">browseName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">topic</span><span class="o">?</span><span class="p">.</span><span class="nx">browseName</span><span class="p">;</span>
+<span class="kd">let</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">msg</span><span class="p">.</span><span class="nx">payload</span><span class="p">;</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">flow</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;405_state&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="p">{</span>
+<span class="nx">station</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;SIF-405&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">status</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Unknown&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">recipe</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;StandardMix_v2.3&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">timestamp</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">runningTime</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">current</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span>
+<span class="p">},</span>
+<span class="nx">alarms</span><span class="o">:</span><span class="w"> </span><span class="p">[]</span>
+<span class="p">};</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="nx">browseName</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="k">case</span><span class="w"> </span><span class="s2">&quot;RunningTime&quot;</span><span class="o">:</span>
+<span class="w">    </span><span class="nx">state</span><span class="p">.</span><span class="nx">station</span><span class="p">.</span><span class="nx">runningTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">value</span><span class="p">;</span>
+<span class="w">    </span><span class="k">break</span><span class="p">;</span>
+
+<span class="k">case</span><span class="w"> </span><span class="s2">&quot;AlarmBit&quot;</span><span class="o">:</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">value</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">state</span><span class="p">.</span><span class="nx">station</span><span class="p">.</span><span class="nx">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Alarm&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">state</span><span class="p">.</span><span class="nx">alarms</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;station_alarm&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nx">severity</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;warning&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nx">message</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Station is in Alarm !&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nx">timestamp</span><span class="o">:</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Date</span><span class="p">().</span><span class="nx">toISOString</span><span class="p">()</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">];</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">state</span><span class="p">.</span><span class="nx">station</span><span class="p">.</span><span class="nx">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Running&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">state</span><span class="p">.</span><span class="nx">alarms</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;station_alarm&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nx">severity</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;info&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nx">message</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Station has none alarms&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nx">timestamp</span><span class="o">:</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Date</span><span class="p">().</span><span class="nx">toISOString</span><span class="p">()</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">];</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">break</span><span class="p">;</span>
+
+<span class="k">case</span><span class="w"> </span><span class="s2">&quot;Current&quot;</span><span class="o">:</span>
+<span class="w">    </span><span class="nx">state</span><span class="p">.</span><span class="nx">station</span><span class="p">.</span><span class="nx">current</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">value</span><span class="p">;</span>
+<span class="w">    </span><span class="k">break</span><span class="p">;</span><span class="w">    </span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="nx">state</span><span class="p">.</span><span class="nx">station</span><span class="p">.</span><span class="nx">timestamp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Date</span><span class="p">().</span><span class="nx">toISOString</span><span class="p">();</span>
+
+<span class="nx">flow</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">&quot;405_state&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">state</span><span class="p">);</span>
+
+<span class="nx">msg</span><span class="p">.</span><span class="nx">payload</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">state</span><span class="p">;</span>
+<span class="k">return</span><span class="w"> </span><span class="nx">msg</span><span class="p">;</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<h2 id="outcome">Outcome</h2>
+<p>The Node RED and OPC UA layer achieved:</p>
+<p>• Stable PLC communication for SIF 402 and SIF 405<br />
+• Clear separation between industrial and application layers<br />
+• Station level data aggregation to reduce Unity API calls<br />
+• REST APIs suitable for XR consumption<br />
+• Reusable flow patterns across stations</p>
+<h2 id="engineering-challenges-and-lessons-learned">Engineering challenges and lessons learned</h2>
+<p>• OPC UA discovery was non-trivial due to deeply nested address spaces and inconsistent signal naming<br />
+• Early validation with an OPC UA browser was essential to avoid incorrect node configuration<br />
+• Containerized Node-RED setups introduced networking issues under WSL2, reinforcing the need to understand host–container communication<br />
+• Aggregating signals into station-level JSON objects significantly reduced API complexity and coupling with Unity<br />
+• Flow context management was critical to ensure REST endpoints returned consistent snapshots rather than transient values</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
