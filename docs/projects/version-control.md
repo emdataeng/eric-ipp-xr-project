@@ -88,6 +88,10 @@ Version control practices were aligned with the collaborative nature of the proj
 • Regular synchronization of changes through GitHub  
 • Shared understanding of which components were owned individually versus collaboratively  
 
+Sprint planning and task coordination were managed using a shared Taiga board, which was used to organize user stories, tasks, and sprint progress throughout the project.
+
+https://tree.taiga.io/project/xrteacher-xr2025-g2/timeline
+
 These practices reduced integration friction and supported steady progress across sprints.
 
 ---
