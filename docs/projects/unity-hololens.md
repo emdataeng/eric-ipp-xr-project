@@ -79,6 +79,14 @@ Figure 24 – HoloLens view showing simultaneous visualization of stations SIF40
 
 *Testing the XR application with live industrial data on Microsoft HoloLens 2.*
 
+
+<iframe width="100%" height="400"
+src="https://www.youtube.com/embed/KruqfdqWRAk"
+frameborder="0"
+allowfullscreen>
+</iframe>
+*Live execution of the XR application on Microsoft HoloLens 2, showing real-time industrial data integration and system interaction.*
+
 ---
 
 ## Outcome
