@@ -31,9 +31,12 @@ My individual contributions are traceable in a dedicated branch of the team repo
 
 ## Source code repository
 
-The main team repository is hosted here:
+The original team repository is hosted here:
 
 https://github.com/Sallamhamza/unity-hololens-industrial-data
+
+my fork is here:
+https://github.com/emdataeng/unity-hololens-industrial-data.git
 
 ## Quick links
 
